@@ -14,9 +14,9 @@ export default function Auth() {
     try {
       event.preventDefault();
       await login(email, password);
-
-      const url = location.state.origin ? location.state.pathname : '/';
-
+      console.log(location.search.origin)
+      const url = location.search.origin ? location.search.pathname : '/';
+      
       history.replace(url);
 
     } catch (error) {
@@ -31,6 +31,8 @@ export default function Auth() {
         <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="Email" />
         <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} placeholder="Password" />
         <button type="submit">Sign In</button>
+        {/* get clarifcation on the below line */}
+        <p>{error}</p>
       </form>
     </>
   )
