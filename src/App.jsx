@@ -9,10 +9,10 @@ export default function App() {
     <UserProvider>
       <Switch >
         <Route path='/login'>
-        <Auth />
+          <Auth />
         </Route>
         <PrivateRoute path='/dashboard'>
-        <Dashboard />
+          <Dashboard />
         </PrivateRoute>
       </Switch>
     </UserProvider>
