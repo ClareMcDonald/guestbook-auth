@@ -9,14 +9,16 @@ export default function Auth() {
   const [error, setError] = useState('');
   const location = useLocation();
   const history = useHistory();
-  
+
+  //write handleSubmit function
+
   return (
     <>
       <h1>Auth</h1>
       <form>
-        <input />
-        <input />
-        <button>Sign In</button>
+        <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="Email" />
+        <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} placeholder="Password" />
+        <button type="submit">Sign In</button>
       </form>
     </>
   )
