@@ -10,12 +10,24 @@ export default function Auth() {
   const location = useLocation();
   const history = useHistory();
 
-  //write handleSubmit function
+  const handleSubmit = async (event) => {
+    try {
+      event.preventDefault();
+      await login(email, password);
+
+      const url = location.state.origin ? location.state.pathname : '/';
+
+      history.replace(url);
+
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
   return (
     <>
       <h1>Auth</h1>
-      <form>
+      <form onSubmit={handleSubmit}>
         <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="Email" />
         <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} placeholder="Password" />
         <button type="submit">Sign In</button>
