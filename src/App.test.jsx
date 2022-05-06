@@ -45,7 +45,7 @@ const server = setupServer(
         },
     }))
     ),
-    rest.get('https://ezwbsacoojmonmiqffad.supabase.co/rest/v1/entries', (req, res, ctx) => res(ct.json([
+    rest.get('https://ezwbsacoojmonmiqffad.supabase.co/rest/v1/entries', (req, res, ctx) => res(ctx.json([
         {
             "id": 191,
             "guest_id": "123456",
@@ -104,10 +104,11 @@ describe('App', () => {
         const signUpButton = screen.getByRole('button', { name: /sign up/i });
         userEvent.click(signUpButton);
         
-        userEvent.click(dashboardLink);
+        const dashboardLinkAgain = await screen.findByRole('link', { name: /view dashboard/i });
+        userEvent.click(dashboardLinkAgain);
         
         const dashboardHeading = await screen.findByText('logged in as testclare@test.com');
-
-        const entry = await screen.findByText('hi');
+        screen.debug();
+        const entry = await screen.findAllByText('hi', {exact: false});
     });
 });
