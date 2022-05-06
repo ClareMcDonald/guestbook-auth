@@ -4,10 +4,10 @@ import { useUser } from '../../context/UserContext';
 import { getEntries } from '../../services/entries';
 
 export default function Dashboard() {
-  const { logout } = useUser();
+  const { logout, user } = useUser();
   const [entries, setEntries] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  console.log(entries);
   useEffect(() => {
     getEntries()
       .then(setEntries)
@@ -19,11 +19,13 @@ export default function Dashboard() {
     <>
       <h2>Dashboard</h2>
       <button onClick={logout}>Sign Out</button>
-      <EntryForm onAddEntry={getEntries} />
+      <EntryForm />
       {loading
         ? <p>Loading entries ^_^</p>
         : <ul>{entries.map((entry) => (
-          <li key={entry.id}>{entry.content}</li>
+          <li key={entry.id}>{entry.content} <br />
+            author: {user.email} <br />
+            on {entry.created_at}</li>
         ))}</ul>
       }
     </>
