@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import EntryForm from '../../components/EntryForm';
 import { useUser } from '../../context/UserContext';
 import { getEntries } from '../../services/entries';
 
@@ -18,6 +19,7 @@ export default function Dashboard() {
     <>
       <h2>Dashboard</h2>
       <button onClick={logout}>Sign Out</button>
+      <EntryForm onSubmit={getEntries}/>
       {loading
         ? <p>Loading entries ^_^</p>
         : <ul>{entries.map((entry) => (
