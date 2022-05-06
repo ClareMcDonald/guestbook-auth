@@ -76,7 +76,16 @@ const server = setupServer(
             "content": "hi",
             "created_at": "2022-05-06T19:18:02.924612+00:00"
         },
-    ])))
+    ]))),
+    rest.post('https://ezwbsacoojmonmiqffad.supabase.co/rest/v1/entries', (req, res, ctx) => res(ctx.json(
+        {
+            "id": 192,
+            "guest_id": "123456",
+            "content": "super cool new entry",
+            "created_at": "2022-05-06T19:55:26.555527+00:00"
+        },
+        
+    )))
 );
 
 beforeAll(() => server.listen());
@@ -90,7 +99,6 @@ describe('App', () => {
                 <App />
             </MemoryRouter>
         );
-        
         
         const dashboardLink = screen.getByRole('link', { name: /view dashboard/i });
         userEvent.click(dashboardLink);
@@ -108,7 +116,15 @@ describe('App', () => {
         userEvent.click(dashboardLinkAgain);
         
         const dashboardHeading = await screen.findByText('logged in as testclare@test.com');
-        screen.debug();
-        const entry = await screen.findAllByText('hi', {exact: false});
+        
+        const entry = await screen.findAllByText('hi', { exact: false });
+        
+        const entryInput = screen.getByPlaceholderText(/add an entry/i);
+        userEvent.type(entryInput, 'super cool new entry');
+
+        const addButton = screen.getByRole('button', { name: /add entry/i });
+        userEvent.click(addButton);
+
+        const newEntry = await screen.findByText('super cool new entry', { exact: false });
     });
 });

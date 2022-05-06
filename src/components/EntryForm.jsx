@@ -17,7 +17,7 @@ export default function EntryForm({ refreshEntries }) {
   return (
     <>
         <form onSubmit={addEntry}>
-            <textarea value={content} name='content' onChange={(e) => setContent(e.target.value)}></textarea>
+            <textarea value={content} name='content' placeholder='add an entry' onChange={(e) => setContent(e.target.value)}></textarea>
             <button type='submit'>Add Entry</button>
         </form>
     </>
