@@ -24,8 +24,7 @@ export default function Dashboard() {
         ? <p>Loading entries ^_^</p>
         : <ul>{entries.map((entry) => (
           <li key={entry.id}>{entry.content} <br />
-            author: {user.email} <br />
-            on {entry.created_at}</li>
+            author: {user.email} </li>
         ))}</ul>
       }
     </>
