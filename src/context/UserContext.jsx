@@ -16,7 +16,7 @@ export const UserProvider = ({ children }) => {
     };
 
     const signUp = async (email, password) => {
-        const authenticatedUser = signUpUser({ email, password });
+        const authenticatedUser = await signUpUser({ email, password });
 
         if (authenticatedUser) {
             setUser(authenticatedUser)

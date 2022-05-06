@@ -3,7 +3,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
 
 export default function Auth() {
-  const { login } = useUser();
+  const { login, signUp } = useUser();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -24,6 +24,20 @@ export default function Auth() {
     }
   };
 
+  const handleSignUp = async () => {
+    try {
+    await signUp(email, password);
+    const url = location.search.origin ? location.search.pathname : '/';
+      
+    history.replace(url);
+
+  } catch (error) {
+    setError(error.message);
+  }
+
+
+  };
+
   return (
     <>
       <h1>Auth</h1>
@@ -31,7 +45,7 @@ export default function Auth() {
         <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="Email" />
         <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} placeholder="Password" />
         <button type="submit">Sign In</button>
-        {/* get clarifcation on the below line */}
+        <button onClick={handleSignUp}>Sign Up</button>
         <p>{error}</p>
       </form>
     </>
