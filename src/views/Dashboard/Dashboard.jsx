@@ -4,7 +4,7 @@ import { useUser } from '../../context/UserContext';
 import { getEntries } from '../../services/entries';
 
 export default function Dashboard() {
-  const { logout, user } = useUser();
+  const { user } = useUser();
   const [entries, setEntries] = useState([]);
   const [loading, setLoading] = useState(true);
   console.log(entries);
@@ -27,7 +27,6 @@ export default function Dashboard() {
   return (
     <>
       <h2>Dashboard</h2>
-      <button onClick={logout}>Sign Out</button>
       <EntryForm refreshEntries={refreshEntries}/>
       {loading
         ? <p>Loading entries ^_^</p>
