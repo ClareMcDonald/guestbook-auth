@@ -19,7 +19,7 @@ export default function Dashboard() {
     <>
       <h2>Dashboard</h2>
       <button onClick={logout}>Sign Out</button>
-      <EntryForm onSubmit={getEntries}/>
+      <EntryForm onAddEntry={getEntries} />
       {loading
         ? <p>Loading entries ^_^</p>
         : <ul>{entries.map((entry) => (
