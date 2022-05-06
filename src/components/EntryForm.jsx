@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useUser } from '../context/UserContext';
 import { createEntry, getEntries } from '../services/entries';
 
-export default function EntryForm() {
+export default function EntryForm({ refreshEntries }) {
     const [content, setContent] = useState('');
     const { user } = useUser();
 
@@ -11,11 +11,8 @@ export default function EntryForm() {
     const entry = await createEntry({ userId: user.id, content });
   
     setContent('');
+    await refreshEntries();
   }
-
-  // useEffect(() => {
-  //   getEntries();
-  // }, []);
 
   return (
     <>

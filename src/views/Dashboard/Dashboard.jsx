@@ -8,6 +8,7 @@ export default function Dashboard() {
   const [entries, setEntries] = useState([]);
   const [loading, setLoading] = useState(true);
   console.log(entries);
+
   useEffect(() => {
     getEntries()
       .then(setEntries)
@@ -15,11 +16,19 @@ export default function Dashboard() {
       .finally(() => setLoading(false));
   }, []);
 
+  async function refreshEntries() {
+    setLoading(true);
+    getEntries()
+    .then(setEntries)
+    .catch(console.error)
+    .finally(() => setLoading(false));
+  }
+
   return (
     <>
       <h2>Dashboard</h2>
       <button onClick={logout}>Sign Out</button>
-      <EntryForm />
+      <EntryForm refreshEntries={refreshEntries}/>
       {loading
         ? <p>Loading entries ^_^</p>
         : <ul>{entries.map((entry) => (
