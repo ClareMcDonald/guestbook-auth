@@ -100,8 +100,8 @@ describe('App', () => {
             </MemoryRouter>
         );
         
-        const dashboardLink = screen.getByRole('link', { name: /view dashboard/i });
-        userEvent.click(dashboardLink);
+        // const dashboardLink = screen.getByRole('link', { name: /view dashboard/i });
+        // userEvent.click(dashboardLink);
         
         const emailInput = screen.getByRole('textbox');
         userEvent.type(emailInput, 'testclare@test.com');
